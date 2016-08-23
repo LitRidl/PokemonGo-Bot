@@ -119,8 +119,6 @@ function setUserLocation(lat, lng){
 
 function createMessage(text){
     return {
-        lat: shareAccurateLocation ? userLocation.lat() : fuzzyUserLocation.lat(),
-        lng: shareAccurateLocation ? userLocation.lng() : fuzzyUserLocation.lng(),
         text: text
     };
 }
@@ -209,13 +207,13 @@ function displayChatMessageOnMap(raw){
 
 function displayMessageOnMap(msg, olat, olong, sessid){
 
-	// @ro: passing values split from incoming payload into two variables for now (lat and long)
-	var newPosition = new google.maps.LatLng(olat, olong);
+    // @ro: passing values split from incoming payload into two variables for now (lat and long)
+    var newPosition = new google.maps.LatLng(olat, olong);
     var msgSessionId = sessid;
 
-	// @ro: just checking the output
-	console.log(olat);
-	console.log(olong);
+    // @ro: just checking the output
+    console.log(olat);
+    console.log(olong);
 
     // xss prevention hack
     msg.text = html_sanitize(msg.text);
@@ -224,7 +222,7 @@ function displayMessageOnMap(msg, olat, olong, sessid){
         return entityMap[s];
     });
 
-	// msg.text = msg.text ? embedTweet(msg.text) : "";
+    // msg.text = msg.text ? embedTweet(msg.text) : "";
     msg.text = msg.text.replace(/&#35;(\S*)/g,'<a href="http://idoco.github.io/map-chat/#$1" target="_blank">#$1</a>');
 
     // linkify
